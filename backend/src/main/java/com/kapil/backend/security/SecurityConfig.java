@@ -35,8 +35,10 @@ public class SecurityConfig {
 
         http
                 // Disable CSRF for REST APIs
-                .csrf(csrf -> csrf.disable())
+                .cors(cors -> {})
 
+                // Disable CSRF for REST APIs
+                .csrf(csrf -> csrf.disable())
                 // Stateless session (JWT-ready)
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -62,6 +64,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // allow authentication endpoints
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/accounts/**").permitAll()
                         // everything else secured
                         .anyRequest().authenticated()
                 )
@@ -101,4 +104,19 @@ public class SecurityConfig {
             CustomUserDetailsService userDetailsService) {
         return new JwtAuthenticationFilter(userDetailsService);
     }
+
+    @Bean
+    public org.springframework.web.cors.CorsConfigurationSource corsConfigurationSource() {
+        org.springframework.web.cors.CorsConfiguration config = new org.springframework.web.cors.CorsConfiguration();
+        config.setAllowedOrigins(java.util.List.of("http://localhost:4200"));
+        config.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(java.util.List.of("*"));
+        config.setAllowCredentials(true);
+
+        org.springframework.web.cors.UrlBasedCorsConfigurationSource source =
+                new org.springframework.web.cors.UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
+
 }

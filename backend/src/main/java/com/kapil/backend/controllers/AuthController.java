@@ -1,9 +1,11 @@
 package com.kapil.backend.controllers;
 
+import com.kapil.backend.dto.ErrorResponse;
 import com.kapil.backend.dto.LoginRequest;
 import com.kapil.backend.dto.LoginResponse;
 import com.kapil.backend.dto.RegisterRequest;
 import com.kapil.backend.models.User;
+import com.kapil.backend.repositery.UserRepositery;
 import com.kapil.backend.security.JwtUtil;
 import com.kapil.backend.services.UserService;
 import jakarta.validation.Valid;
@@ -14,20 +16,23 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
+    private final UserRepositery userRepositery;
 
-    public AuthController(AuthenticationManager authenticationManager, UserService userService) {
+    public AuthController(AuthenticationManager authenticationManager, UserService userService, UserRepositery userRepositery) {
         this.authenticationManager = authenticationManager;
         this.userService = userService;
+        this.userRepositery = userRepositery;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(
+    public ResponseEntity<?> login(
             @Valid @RequestBody LoginRequest request) {
 
         try {
@@ -39,15 +44,24 @@ public class AuthController {
                             )
                     );
 
-            // If we reach here → authentication successful
             String token = JwtUtil.generateToken(request.getUsername());
+
+            User user = userRepositery
+                    .findByUsername(request.getUsername())
+                    .orElseThrow();
+
             return ResponseEntity.ok(
-                    new LoginResponse(token)
+                    new LoginResponse(
+                            token,
+                            user.getUsername(),
+                            user.getFirstName(),
+                            user.getLastName()
+                    )
             );
+
         } catch (AuthenticationException ex) {
-            // Bad credentials / user not found
             return ResponseEntity.status(401)
-                    .body(new LoginResponse("Invalid username or password"));
+                    .body(new ErrorResponse("Invalid username or password"));
         }
     }
 
@@ -63,8 +77,23 @@ public class AuthController {
 
         userService.createUser(user);
 
+
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getUsername(),
+                        request.getPassword()
+                )
+        );
+
+        String token = JwtUtil.generateToken(request.getUsername());
+
+
         return ResponseEntity.status(201)
-                .body(new LoginResponse("User registered successfully"));
+                .body(new LoginResponse(
+                        token,
+                        user.getUsername(),
+                        user.getFirstName(),
+                        user.getLastName()));
     }
 
 }

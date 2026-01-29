@@ -1,0 +1,49 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Dashboard</h2>
+
+  <div class="row g-4">
+
+    <!-- Books Count -->
+    <div class="col-md-3">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h6 class="text-muted">Total Books</h6>
+          <h2>12</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total Todos -->
+    <div class="col-md-3">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h6 class="text-muted">Todos</h6>
+          <h1>Total : {{ todoService.getTodos()().length }}</h1>
+          <h2>Open : {{ todoService.openTodos().length }}</h2>
+          <h2>Done : {{ todoService.doneTodos().length }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Open Todos -->
+    <div class="col-md-3">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h6 class="text-muted">Other</h6>
+          <h2>5</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Completed Todos -->
+    <div class="col-md-3">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h6 class="text-muted">Other</h6>
+          <h2>3</h2>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

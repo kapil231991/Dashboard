@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/authors")
 public class AuthorController {
@@ -14,6 +16,7 @@ public class AuthorController {
     private final AuthorService authorService;
 
     public AuthorController(AuthorService authorService) {
+        System.out.println("I am coming here");
         this.authorService = authorService;
     }
 

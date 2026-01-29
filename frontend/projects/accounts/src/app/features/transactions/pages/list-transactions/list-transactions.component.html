@@ -1,0 +1,60 @@
+<div class="card">
+  <h2 class="mb-3">Transactions</h2>
+
+  <p-table
+    [value]="transactions"
+    [loading]="loading"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[5,10,20]"
+    responsiveLayout="scroll"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Date</th>
+        <th>Account</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Tags</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-tx>
+      <tr>
+        <td>{{ tx.createdDate | date: 'dd MMM yyyy, HH:mm' }}</td>
+        <td>{{ tx.accountName }}</td>
+        <td>{{ tx.name }}</td>
+        <td>{{ tx.description }}</td>
+        <td>
+          <span
+            class="px-2 py-1 border-round text-sm"
+            [ngClass]="{
+              'bg-red-100 text-red-700': tx.transactionType === 'DR',
+              'bg-green-100 text-green-700': tx.transactionType === 'CR'
+            }"
+          >
+            {{ tx.transactionType }}
+          </span>
+        </td>
+        <td class="text-right">
+          ₹ {{ tx.amount }}
+        </td>
+        <td>
+          <p-tag
+            *ngFor="let tag of tx.tags"
+            [value]="tag"
+            class="mr-1"
+          ></p-tag>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7" class="text-center">No transactions found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

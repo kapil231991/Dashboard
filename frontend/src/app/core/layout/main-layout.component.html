@@ -1,0 +1,110 @@
+<div class="container-fluid p-0">
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-dark bg-dark px-3">
+        <!-- Brand -->
+        <a class="navbar-brand me-4">Dashboard</a>
+
+        <!-- Left Menu -->
+        <ul class="navbar-nav flex-row gap-3">
+            <!-- <li class="nav-item">
+                <a class="nav-link" routerLink="/author" routerLinkActive="active">
+                    Author
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/book" routerLinkActive="active">
+                    Book
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/user" routerLinkActive="active">
+                    User
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/todo" routerLinkActive="active">
+                    Todo
+                </a>
+            </li> -->
+
+
+             <!-- Accounts Dropdown -->
+            <li class="nav-item dropdown position-relative">
+                <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="accountsDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                >
+                    Library
+                </a>
+
+                <ul class="dropdown-menu position-absolute mt-2" aria-labelledby="accountsDropdown">
+                    <li>
+                        <a class="dropdown-item" routerLink="/author">
+                            Authors
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="/book">
+                            Books
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+             <!-- Accounts Dropdown -->
+            <li class="nav-item dropdown position-relative">
+                <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="accountsDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                >
+                    Finance
+                </a>
+
+                <ul class="dropdown-menu position-absolute mt-2" aria-labelledby="accountsDropdown">
+                    <li>
+                        <a class="dropdown-item" routerLink="/accounts">
+                            Accounts
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="/accounts/transactions">
+                            Transactions
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+        <!-- Right User Dropdown -->
+        <div class="ms-auto dropdown" *ngIf="authService.isLoggedIn()">
+            <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                👤 {{ authService.fullName() || authService.isLoggedIn() }}
+            </button>
+
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <button class="dropdown-item" (click)="onLogout()">
+                        Logout
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+
+    <!-- Page Content -->
+    <main class="p-4">
+        <router-outlet></router-outlet>
+    </main>
+</div>

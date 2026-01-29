@@ -1,0 +1,30 @@
+<div class="card p-3">
+  <div class="d-flex justify-content-between mb-3">
+    <h5>Authors</h5>
+    <a routerLink="/author/add" class="btn btn-primary">Add Author</a>
+  </div>
+
+  <p-table [value]="(authors$ | async) ?? []" [loading]="loading$ |async">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Country</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-a>
+      <tr>
+        <td>{{ a.name }}</td>
+        <td>{{ a.email }}</td>
+        <td>{{ a.country }}</td>
+        <td>
+          <button class="btn btn-sm btn-danger" (click)="deleteAuthor(a.id!)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

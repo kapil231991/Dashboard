@@ -1,0 +1,8 @@
+[
+  { "tagName": "Food", "description": "Daily meals & snacks" },
+  { "tagName": "Travel", "description": "Commute & trips" },
+  { "tagName": "Rent", "description": "House rent" },
+  { "tagName": "Groceries", "description": "Monthly grocery shopping" },
+  { "tagName": "Entertainment", "description": "Movies, games, subscriptions" },
+  { "tagName": "Miscelenious", "description": "Nahi karo yeh wale kharche" }
+]
