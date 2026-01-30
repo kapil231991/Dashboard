@@ -1,0 +1,81 @@
+<div class="card p-3">
+    <h5 class="mb-3">{{ title }}</h5>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="row g-3">
+
+        <!-- Account -->
+        <div class="col-md-6">
+            <label class="form-label">Account</label>
+            <select class="form-select" formControlName="accountId">
+                <option value="" disabled>Select account</option>
+                <option *ngFor="let a of accounts" [value]="a.id">
+                    {{ a.name }}
+                </option>
+            </select>
+        </div>
+
+        <!-- Transaction Type -->
+        <div class="col-md-6">
+            <label class="form-label">Transaction Type</label>
+            <select class="form-select" formControlName="transactionType">
+                <option value="" disabled>Select type</option>
+                <option *ngFor="let t of transactionTypes" [value]="t.value">
+                    {{ t.label }}
+                </option>
+            </select>
+        </div>
+
+        <!-- Amount -->
+        <div class="col-md-6">
+            <label class="form-label">Amount</label>
+            <p-inputNumber
+                class="w-100"
+                formControlName="amount">
+            </p-inputNumber>
+        </div>
+
+        <!-- Name -->
+        <div class="col-md-6">
+            <label class="form-label">Name</label>
+            <input
+                pInputText
+                class="w-100"
+                formControlName="name" />
+        </div>
+
+        <!-- Description -->
+        <div class="col-md-6">
+            <label class="form-label">Description</label>
+            <input
+                pInputText
+                class="w-100"
+                formControlName="description" />
+        </div>
+
+        <!-- Tags -->
+        <div class="col-md-6">
+            <label class="form-label">Tags</label>
+            <p-multiSelect
+                class="w-100"
+                formControlName="tagIds"
+                [options]="tags"
+                optionLabel="tagName"
+                optionValue="id"
+                placeholder="Select tags">
+            </p-multiSelect>
+        </div>
+
+        <!-- Actions -->
+        <div class="col-12 d-flex gap-2 mt-3">
+            <button
+                pButton
+                type="submit"
+                [label]="submitLabel"
+                [disabled]="form.invalid">
+            </button>
+
+            <a routerLink="../" class="btn btn-secondary">Cancel</a>
+        </div>
+
+    </form>
+</div>

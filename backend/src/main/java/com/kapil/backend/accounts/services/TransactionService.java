@@ -170,5 +170,19 @@ public class TransactionService {
         return map(saved);
     }
 
+    public void delete(Long id, User user) {
+
+        Transaction tx = transactionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Transaction not found"));
+
+        // Ownership check
+        if (tx.getCreatedBy().getUserId() != user.getUserId()) {
+            throw new RuntimeException("Forbidden");
+        }
+
+        transactionRepository.delete(tx);
+    }
+
+
 
 }

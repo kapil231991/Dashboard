@@ -50,4 +50,11 @@ public class TransactionController {
                                       @AuthenticationPrincipal CustomUserDetails user) {
         return transactionService.update(id, req, user.getUser());
     }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id,
+                       @AuthenticationPrincipal CustomUserDetails user) {
+        transactionService.delete(id, user.getUser());
+    }
+
 }

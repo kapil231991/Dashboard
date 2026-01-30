@@ -16,6 +16,7 @@ import { authorFeatureKey, authorReducer } from './app/state/author/author.reduc
 import { AuthorEffects } from './app/state/author/author.effects';
 import { bookFeatureKey, bookReducer } from './app/state/book/book.reducer';
 import { BookEffects } from './app/state/book/book.effects';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 bootstrapApplication(App, {
@@ -39,5 +40,7 @@ bootstrapApplication(App, {
 
     provideEffects([AuthorEffects, BookEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: false }),
+    MessageService,
+    ConfirmationService
   ],
 });

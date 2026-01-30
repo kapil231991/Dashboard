@@ -1,0 +1,17 @@
+.transactions-table .p-datatable-thead > tr > th,
+.transactions-table .p-datatable-tbody > tr > td {
+  padding: 0.4rem 0.6rem; /* default is ~1rem */
+  vertical-align: middle;
+  font-size: 0.85rem;
+}
+
+/* Reduce tag height */
+.transactions-table .p-tag {
+  padding: 0.1rem 0.4rem;
+  font-size: 0.75rem;
+}
+
+/* Reduce button height */
+.transactions-table .p-button.p-button-sm {
+  padding: 0.25rem 0.4rem;
+}

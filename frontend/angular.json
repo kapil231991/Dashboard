@@ -26,7 +26,8 @@
 						],
 						"styles": [
 							"node_modules/bootstrap/dist/css/bootstrap.min.css",
-							"src/styles.css"
+							"src/styles.css",
+							"node_modules/primeicons/primeicons.css"
 						],
 						"scripts": [
 							"node_modules/@popperjs/core/dist/umd/popper.min.js",
@@ -132,7 +133,8 @@
 							}
 						],
 						"styles": [
-							"projects/accounts/src/styles.css"
+							"projects/accounts/src/styles.css",
+							"node_modules/primeicons/primeicons.css"
 						],
 						"main": "projects/accounts/src/main.ts",
 						"outputPath": "dist/accounts",

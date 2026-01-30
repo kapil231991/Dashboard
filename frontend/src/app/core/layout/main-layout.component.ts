@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth/auth.service';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
   standalone: true,
@@ -10,7 +12,9 @@ import { AuthService } from '../auth/auth.service';
     CommonModule,
     RouterOutlet,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    ToastModule,
+    ConfirmDialogModule   
   ],
   templateUrl: './main-layout.component.html',
 })

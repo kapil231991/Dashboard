@@ -2,4 +2,10 @@
 * {
   font-family: Consolas, "Courier New", monospace;
 }
+
+.pi,
+.pi::before {
+  font-family: 'primeicons' !important;
+}
+
 /* You can add global styles to this file, and also import other style files */

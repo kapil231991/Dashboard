@@ -1,14 +1,13 @@
-<div class="card">
-  <h2 class="mb-3">Transactions</h2>
+<div class="card p-3">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="m-0">Transactions</h5>
+    <a routerLink="add" class="btn btn-primary">
+      <i class="pi pi-plus me-2"></i> Add Transaction
+    </a>
+  </div>
 
-  <p-table
-    [value]="transactions"
-    [loading]="loading"
-    [paginator]="true"
-    [rows]="10"
-    [rowsPerPageOptions]="[5,10,20]"
-    responsiveLayout="scroll"
-  >
+  <p-table class="transactions-table" [value]="transactions" [loading]="loading" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]"
+    responsiveLayout="scroll">
     <ng-template pTemplate="header">
       <tr>
         <th>Date</th>
@@ -18,6 +17,7 @@
         <th>Type</th>
         <th>Amount</th>
         <th>Tags</th>
+        <th>Actions</th>
       </tr>
     </ng-template>
 
@@ -28,33 +28,36 @@
         <td>{{ tx.name }}</td>
         <td>{{ tx.description }}</td>
         <td>
-          <span
-            class="px-2 py-1 border-round text-sm"
-            [ngClass]="{
-              'bg-red-100 text-red-700': tx.transactionType === 'DR',
-              'bg-green-100 text-green-700': tx.transactionType === 'CR'
-            }"
-          >
+          <span class="px-2 py-1 border-round text-sm" [ngClass]="{
+            'bg-red-100 text-red-700': tx.transactionType === 'DR',
+            'bg-green-100 text-green-700': tx.transactionType === 'CR'
+          }">
             {{ tx.transactionType }}
           </span>
         </td>
-        <td class="text-right">
-          ₹ {{ tx.amount }}
-        </td>
+        <td class="text-right">₹ {{ tx.amount }}</td>
         <td>
-          <p-tag
-            *ngFor="let tag of tx.tags"
-            [value]="tag"
-            class="mr-1"
-          ></p-tag>
+          <p-tag *ngFor="let tag of tx.tags" [value]="tag" class="mr-1"></p-tag>
+        </td>
+
+        <!-- Actions -->
+        <td class="text-center action-col">
+          <button pButton type="button" icon="pi pi-pencil" class="p-button-text p-button-sm me-2"
+            (click)="onEdit(tx.id)"></button>
+
+          <button pButton type="button" icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger"
+            (click)="onDelete(tx.id)"></button>
         </td>
       </tr>
     </ng-template>
 
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td colspan="7" class="text-center">No transactions found.</td>
+        <td colspan="8" class="text-center">No transactions found.</td>
       </tr>
     </ng-template>
   </p-table>
+
+
+
 </div>
