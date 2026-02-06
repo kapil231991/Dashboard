@@ -1,5 +1,5 @@
 import { Component, effect } from '@angular/core';
-import { TodoService } from '../../../shared/services/todo.service';
+import { TodoService } from '@app/todo/todo.service';
 
 @Component({
   standalone: true,
@@ -8,7 +8,7 @@ import { TodoService } from '../../../shared/services/todo.service';
 })
 export class DashboardComponent {
   constructor(public todoService: TodoService) {
-    
+
     effect(() => {
       console.log(
         'DASHBOARD EFFECT → Open:',

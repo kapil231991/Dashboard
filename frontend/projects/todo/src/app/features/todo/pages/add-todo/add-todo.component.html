@@ -1,0 +1,33 @@
+<div class="card p-3">
+    <h5 class="mb-3">{{ title }}</h5>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="row g-3">
+
+        <div class="col-md-4">
+            <label class="form-label">Title</label>
+            <input pInputText class="w-100" formControlName="title" />
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Status</label>
+            <p-select [options]="statusOptions" formControlName="status" optionLabel="label" optionValue="value"
+                class="w-100"></p-select>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Due Date</label>
+            <p-datepicker formControlName="dueDate" [showTime]="true" dateFormat="yy-mm-dd"
+                class="w-100"></p-datepicker>
+        </div>
+
+        <div class="col-md-12">
+            <label class="form-label">Description</label>
+            <textarea pInputTextarea class="w-100" formControlName="description" rows="3"></textarea>
+        </div>
+
+        <div class="col-12 d-flex gap-2 mt-3">
+            <button pButton type="submit" [label]="submitLabel" [disabled]="form.invalid"></button>
+            <button pButton type="button" label="Cancel" class="p-button-secondary" routerLink=".."></button>
+        </div>
+    </form>
+</div>

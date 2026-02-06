@@ -34,42 +34,27 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                // Disable CSRF for REST APIs
-                .cors(cors -> {})
+                // 🔥 THIS IS CRITICAL
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
-                // Disable CSRF for REST APIs
                 .csrf(csrf -> csrf.disable())
-                // Stateless session (JWT-ready)
+
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
 
-                // 🔴 THIS IS THE IMPORTANT PART (401 instead of 403)
                 .exceptionHandling(exception ->
                         exception.authenticationEntryPoint(
                                 (request, response, authException) ->
-                                        response.sendError(
-                                                HttpServletResponse.SC_UNAUTHORIZED,
-                                                "Unauthorized"
-                                        )
+                                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")
                         )
                 )
 
-                // Authorization rules
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/auth/**").permitAll()
-//                        .anyRequest().authenticated()
-//                )
-
                 .authorizeHttpRequests(auth -> auth
-                        // allow authentication endpoints
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/accounts/**").permitAll()
-                        // everything else secured
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/**").authenticated()
                 )
 
-                // Disable default login mechanisms
                 .formLogin(form -> form.disable())
                 .httpBasic(basic -> basic.disable());
 
@@ -78,10 +63,8 @@ public class SecurityConfig {
                 UsernamePasswordAuthenticationFilter.class
         );
 
-
         return http.build();
     }
-
     /**
      * Password encoder (BCrypt)
      */

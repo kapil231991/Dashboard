@@ -18,6 +18,7 @@
         <th>Name</th>
         <th>Type</th>
         <th>Opening Balance</th>
+        <th>Current Balance</th>
         <th>Status</th>
         <th>Created</th>
       </tr>
@@ -28,6 +29,7 @@
         <td>{{ a.name }}</td>
         <td>{{ a.accountType }}</td>
         <td>{{ a.openingBalance | number:'1.2-2' }}</td>
+        <td>{{ a.currentBalance | number:'1.2-2' }}</td>
         <td>{{ a.status }}</td>
         <td>{{ a.createdDate | date:'short' }}</td>
       </tr>

@@ -1,0 +1,72 @@
+<div class="card p-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="m-0">Goals</h5>
+        <a routerLink="add" class="btn btn-primary">
+            <i class="pi pi-plus me-2"></i> Add Goal
+        </a>
+    </div>
+
+    <p-table class="goals-table" [value]="goals" [loading]="loading" [paginator]="true" [rows]="10"
+        [rowsPerPageOptions]="[5,10,20]" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Horizon</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Progress</th>
+                <th>Start Date</th>
+                <th>Target Date</th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-goal>
+            <tr>
+                <td>{{ goal.title }}</td>
+                <td>{{ goal.category }}</td>
+                <td>{{ goal.horizon }}</td>
+                <td>
+                    <span class="px-2 py-1 border-round text-sm" [ngClass]="{
+            'bg-green-100 text-green-700': goal.status === 'ACTIVE',
+            'bg-blue-100 text-blue-700': goal.status === 'COMPLETED',
+            'bg-yellow-100 text-yellow-700': goal.status === 'ON_HOLD',
+            'bg-red-100 text-red-700': goal.status === 'CANCELLED'
+          }">
+                        {{ goal.status }}
+                    </span>
+                </td>
+                <td class="text-center">{{ goal.priority }}</td>
+                <td>
+                    <div class="d-flex align-items-center gap-2">
+                        <p-progressBar [value]="goal.progress" [showValue]="false"
+                            style="flex: 1; height: 8px;"></p-progressBar>
+                        <span class="text-sm">{{ goal.progress }}%</span>
+                    </div>
+                </td>
+                <td>{{ goal.startDate | date: 'dd MMM yyyy' }}</td>
+                <td>{{ goal.targetDate | date: 'dd MMM yyyy' }}</td>
+
+                <!-- Actions -->
+                <td class="text-center action-col">
+                    <button pButton type="button" icon="pi pi-list" class="p-button-text p-button-sm me-2"
+                        pTooltip="View Milestones" tooltipPosition="top" (click)="onViewMilestones(goal.id)"></button>
+
+                    <button pButton type="button" icon="pi pi-pencil" class="p-button-text p-button-sm me-2"
+                        (click)="onEdit(goal.id)"></button>
+
+                    <button pButton type="button" icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger"
+                        (click)="onDelete(goal.id)"></button>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="9" class="text-center">No goals found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>

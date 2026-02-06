@@ -11,7 +11,16 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve"
+    "module": "preserve",
+    "baseUrl": "./",
+    "paths": {
+      "@app/todo/*": [
+        "projects/todo/src/app/*"
+      ],
+      "@app/notes/*": [
+        "projects/notes/src/app/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -33,6 +42,15 @@
     },
     {
       "path": "./projects/accounts/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/todo/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/todo/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/notes/tsconfig.app.json"
     }
   ]
 }

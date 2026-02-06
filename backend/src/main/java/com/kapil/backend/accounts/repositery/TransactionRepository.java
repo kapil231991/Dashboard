@@ -3,9 +3,13 @@ package com.kapil.backend.accounts.repositery;
 
 import com.kapil.backend.accounts.models.Account;
 import com.kapil.backend.accounts.models.Transaction;
+import com.kapil.backend.accounts.models.enums.TransactionType;
 import com.kapil.backend.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -30,6 +34,19 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             LocalDateTime from,
             LocalDateTime to
     );
+
+
+    @Query("""
+    select coalesce(sum(t.amount), 0)
+    from Transaction t
+    where t.account = :account
+      and t.transactionType = :type
+""")
+    BigDecimal sumByAccountAndType(
+            @Param("account") Account account,
+            @Param("type") TransactionType type
+    );
+
 
 
 }

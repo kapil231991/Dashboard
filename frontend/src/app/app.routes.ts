@@ -5,10 +5,10 @@ import { NotFound } from './shared/pages/not-found/not-found';
 import { loadRemoteModule } from '@angular-architects/module-federation';
 export const routes: Routes = [
     {
-    path: 'login',
-    loadChildren: () =>
-    import('./features/auth/auth.routes')
-    .then(m => m.AUTH_ROUTES),
+        path: 'login',
+        loadChildren: () =>
+            import('./features/auth/auth.routes')
+                .then(m => m.AUTH_ROUTES),
     },
     {
         path: '',
@@ -17,13 +17,13 @@ export const routes: Routes = [
         children: [
 
             {
-            path: 'accounts',
-            loadChildren: () =>
-            loadRemoteModule({
-            type: 'module',
-            remoteEntry: 'http://localhost:4300/remoteEntry.js',
-            exposedModule: './Routes',
-            }).then(m => m.ACCOUNTS_ROUTES),
+                path: 'accounts',
+                loadChildren: () =>
+                    loadRemoteModule({
+                        type: 'module',
+                        remoteEntry: 'http://localhost:4300/remoteEntry.js',
+                        exposedModule: './Routes',
+                    }).then(m => m.ACCOUNTS_ROUTES),
             },
             {
                 path: 'author',
@@ -46,8 +46,29 @@ export const routes: Routes = [
             {
                 path: 'todo',
                 loadChildren: () =>
-                    import('./features/todo/todo.routes')
-                        .then(m => m.TODO_ROUTES),
+                    loadRemoteModule({
+                        type: 'module',
+                        remoteEntry: 'http://localhost:4400/remoteEntry.js',
+                        exposedModule: './Routes',
+                    }).then(m => m.TODO_ROUTES),
+            },
+            {
+                path: 'notes',
+                loadChildren: () =>
+                    loadRemoteModule({
+                        type: 'module',
+                        remoteEntry: 'http://localhost:4500/remoteEntry.js',
+                        exposedModule: './Routes',
+                    }).then(m => m.NOTES_ROUTES),
+            },
+            {
+                path: 'strategy',
+                loadChildren: () =>
+                    loadRemoteModule({
+                        type: 'module',
+                        remoteEntry: 'http://localhost:4600/remoteEntry.js',
+                        exposedModule: './Routes',
+                    }).then(m => m.STRATEGY_ROUTES),
             },
             {
                 path: '',

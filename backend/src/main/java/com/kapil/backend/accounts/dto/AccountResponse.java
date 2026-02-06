@@ -14,6 +14,8 @@ public class AccountResponse {
     private AccountStatus status;
     private LocalDateTime createdDate;
 
+    private BigDecimal currentBalance;
+
     public Long getId() {
         return id;
     }
@@ -60,5 +62,13 @@ public class AccountResponse {
 
     public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public BigDecimal getCurrentBalance() {
+        return currentBalance;
+    }
+
+    public void setCurrentBalance(BigDecimal currentBalance) {
+        this.currentBalance = currentBalance;
     }
 }

@@ -5,11 +5,14 @@ import com.kapil.backend.accounts.dto.CreateAccountRequest;
 import com.kapil.backend.accounts.dto.UpdateAccountRequest;
 import com.kapil.backend.accounts.models.Account;
 import com.kapil.backend.accounts.models.enums.AccountStatus;
+import com.kapil.backend.accounts.models.enums.TransactionType;
 import com.kapil.backend.accounts.repositery.AccountRepository;
+import com.kapil.backend.accounts.repositery.TransactionRepository;
 import com.kapil.backend.models.User;
 import com.kapil.backend.repositery.UserRepositery;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,11 +21,15 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
     private final UserRepositery userRepository;
+    private final TransactionRepository transactionRepository;
 
     public AccountService(AccountRepository accountRepository,
-                          UserRepositery userRepository) {
+                          UserRepositery userRepository,
+                          TransactionRepository transactionRepository
+                          ) {
         this.accountRepository = accountRepository;
         this.userRepository = userRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     private User resolveUser(String username) {
@@ -96,6 +103,20 @@ public class AccountService {
         r.setOpeningBalance(a.getOpeningBalance());
         r.setStatus(a.getStatus());
         r.setCreatedDate(a.getCreatedDate());
+
+        BigDecimal totalCr =
+                transactionRepository.sumByAccountAndType(a, TransactionType.CR);
+
+        BigDecimal totalDr =
+                transactionRepository.sumByAccountAndType(a, TransactionType.DR);
+
+        BigDecimal currentBalance =
+                a.getOpeningBalance()
+                        .add(totalCr)
+                        .subtract(totalDr);
+
+        r.setCurrentBalance(currentBalance);
+
         return r;
     }
 }

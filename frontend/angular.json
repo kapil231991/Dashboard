@@ -31,7 +31,8 @@
 						],
 						"scripts": [
 							"node_modules/@popperjs/core/dist/umd/popper.min.js",
-							"node_modules/bootstrap/dist/js/bootstrap.min.js"
+							"node_modules/bootstrap/dist/js/bootstrap.min.js",
+							"node_modules/quill/dist/quill.js"
 						],
 						"main": "src/main.ts",
 						"outputPath": "dist/frontend",
@@ -101,7 +102,9 @@
 						],
 						"styles": [
 							"node_modules/bootstrap/dist/css/bootstrap.min.css",
-							"src/styles.css"
+							"src/styles.css",
+							"node_modules/quill/dist/quill.core.css",
+							"node_modules/quill/dist/quill.snow.css"
 						],
 						"scripts": [
 							"node_modules/@popperjs/core/dist/umd/popper.min.js",
@@ -204,6 +207,355 @@
 						],
 						"styles": [
 							"projects/accounts/src/styles.css"
+						]
+					}
+				}
+			}
+		},
+		"todo": {
+			"projectType": "application",
+			"schematics": {},
+			"root": "projects/todo",
+			"sourceRoot": "projects/todo/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"main": "projects/todo/src/main.ts",
+						"outputPath": "dist/todo",
+						"index": "projects/todo/src/index.html",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/todo/tsconfig.app.json",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/todo/public",
+								"output": "."
+							}
+						],
+						"styles": [
+							"projects/todo/src/styles.css"
+						],
+						"extraWebpackConfig": "projects/todo/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/todo/webpack.prod.config.js"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "todo:build:production",
+							"extraWebpackConfig": "projects/todo/webpack.prod.config.js"
+						},
+						"development": {
+							"buildTarget": "todo:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4400,
+						"publicHost": "http://localhost:4400",
+						"extraWebpackConfig": "projects/todo/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular/build:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular/build:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/todo/tsconfig.spec.json",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/todo/public"
+							}
+						],
+						"styles": [
+							"projects/todo/src/styles.css"
+						]
+					}
+				}
+			}
+		},
+		"notes": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"inlineStyle": true,
+					"skipTests": true
+				},
+				"@schematics/angular:class": {
+					"skipTests": true
+				},
+				"@schematics/angular:directive": {
+					"skipTests": true
+				},
+				"@schematics/angular:guard": {
+					"skipTests": true
+				},
+				"@schematics/angular:interceptor": {
+					"skipTests": true
+				},
+				"@schematics/angular:pipe": {
+					"skipTests": true
+				},
+				"@schematics/angular:resolver": {
+					"skipTests": true
+				},
+				"@schematics/angular:service": {
+					"skipTests": true
+				}
+			},
+			"root": "projects/notes",
+			"sourceRoot": "projects/notes/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"main": "projects/notes/src/main.ts",
+						"outputPath": "dist/notes",
+						"index": "projects/notes/src/index.html",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/notes/tsconfig.app.json",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/notes/public",
+								"output": "."
+							}
+						],
+						"styles": [
+							"projects/notes/src/styles.css",
+							"node_modules/quill/dist/quill.snow.css"
+						],
+						"scripts": [
+							"node_modules/quill/dist/quill.js"
+						],
+						"extraWebpackConfig": "projects/notes/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/notes/webpack.prod.config.js"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "notes:build:production",
+							"extraWebpackConfig": "projects/notes/webpack.prod.config.js"
+						},
+						"development": {
+							"buildTarget": "notes:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4500,
+						"publicHost": "http://localhost:4500",
+						"extraWebpackConfig": "projects/notes/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular/build:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular/build:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/notes/tsconfig.spec.json",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/notes/public"
+							}
+						],
+						"styles": [
+							"projects/notes/src/styles.css"
+						]
+					}
+				}
+			}
+		},
+		"strategy": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"inlineStyle": true,
+					"skipTests": true
+				},
+				"@schematics/angular:class": {
+					"skipTests": true
+				},
+				"@schematics/angular:directive": {
+					"skipTests": true
+				},
+				"@schematics/angular:guard": {
+					"skipTests": true
+				},
+				"@schematics/angular:interceptor": {
+					"skipTests": true
+				},
+				"@schematics/angular:pipe": {
+					"skipTests": true
+				},
+				"@schematics/angular:resolver": {
+					"skipTests": true
+				},
+				"@schematics/angular:service": {
+					"skipTests": true
+				}
+			},
+			"root": "projects/strategy",
+			"sourceRoot": "projects/strategy/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"main": "projects/strategy/src/main.ts",
+						"outputPath": "dist/strategy",
+						"index": "projects/strategy/src/index.html",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/strategy/tsconfig.app.json",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/strategy/public",
+								"output": "."
+							}
+						],
+						"styles": [
+							"projects/strategy/src/styles.css",
+							"node_modules/primeicons/primeicons.css"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/strategy/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/strategy/webpack.prod.config.js"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "strategy:build:production",
+							"extraWebpackConfig": "projects/strategy/webpack.prod.config.js"
+						},
+						"development": {
+							"buildTarget": "strategy:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4600,
+						"publicHost": "http://localhost:4600",
+						"extraWebpackConfig": "projects/strategy/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular/build:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular/build:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/strategy/tsconfig.spec.json",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/strategy/public"
+							}
+						],
+						"styles": [
+							"projects/strategy/src/styles.css"
 						]
 					}
 				}

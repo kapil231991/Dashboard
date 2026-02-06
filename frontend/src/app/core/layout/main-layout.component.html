@@ -8,40 +8,11 @@
 
         <!-- Left Menu -->
         <ul class="navbar-nav flex-row gap-3">
-            <!-- <li class="nav-item">
-                <a class="nav-link" routerLink="/author" routerLinkActive="active">
-                    Author
-                </a>
-            </li>
 
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/book" routerLinkActive="active">
-                    Book
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/user" routerLinkActive="active">
-                    User
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/todo" routerLinkActive="active">
-                    Todo
-                </a>
-            </li> -->
-
-
-             <!-- Accounts Dropdown -->
+            <!-- Accounts Dropdown -->
             <li class="nav-item dropdown position-relative">
-                <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    id="accountsDropdown"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                >
+                <a class="nav-link dropdown-toggle" href="#" id="accountsDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     Library
                 </a>
 
@@ -60,16 +31,10 @@
             </li>
 
 
-             <!-- Accounts Dropdown -->
+            <!-- Accounts Dropdown -->
             <li class="nav-item dropdown position-relative">
-                <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    id="accountsDropdown"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                >
+                <a class="nav-link dropdown-toggle" href="#" id="accountsDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     Finance
                 </a>
 
@@ -82,6 +47,42 @@
                     <li>
                         <a class="dropdown-item" routerLink="/accounts/transactions">
                             Transactions
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- Accounts Dropdown -->
+            <li class="nav-item dropdown position-relative">
+                <a class="nav-link dropdown-toggle" href="#" id="accountsDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Utilities
+                </a>
+
+                <ul class="dropdown-menu position-absolute mt-2" aria-labelledby="accountsDropdown">
+                    <li>
+                        <a class="dropdown-item" routerLink="/todo">
+                            Todo
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="/notes">
+                            Notes
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Strategy Dropdown -->
+            <li class="nav-item dropdown position-relative">
+                <a class="nav-link dropdown-toggle" href="#" id="strategyDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Strategy
+                </a>
+
+                <ul class="dropdown-menu position-absolute mt-2" aria-labelledby="strategyDropdown">
+                    <li>
+                        <a class="dropdown-item" routerLink="/strategy/goals">
+                            Goals
                         </a>
                     </li>
                 </ul>

@@ -1,0 +1,56 @@
+<div class="card p-3">
+    <h5 class="mb-3">{{ title }}</h5>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="row g-3">
+
+        <!-- Year -->
+        <div class="col-md-6">
+            <label class="form-label">Year *</label>
+            <p-inputNumber class="w-100" formControlName="year" [min]="currentYear" [useGrouping]="false">
+            </p-inputNumber>
+        </div>
+
+        <!-- Month -->
+        <div class="col-md-6">
+            <label class="form-label">Month *</label>
+            <select class="form-select" formControlName="month">
+                <option value="" disabled>Select month</option>
+                <option *ngFor="let m of months" [value]="m.value">
+                    {{ m.label }}
+                </option>
+            </select>
+        </div>
+
+        <!-- Title -->
+        <div class="col-12">
+            <label class="form-label">Title *</label>
+            <input pInputText class="w-100" formControlName="title" />
+        </div>
+
+        <!-- Description -->
+        <div class="col-12">
+            <label class="form-label">Description *</label>
+            <textarea class="form-control" formControlName="description" rows="4"></textarea>
+        </div>
+
+        <!-- Status (only shown in edit mode) -->
+        <div class="col-md-6" *ngIf="isEditMode">
+            <label class="form-label">Status *</label>
+            <select class="form-select" formControlName="status">
+                <option value="" disabled>Select status</option>
+                <option *ngFor="let s of statuses" [value]="s.value">
+                    {{ s.label }}
+                </option>
+            </select>
+        </div>
+
+        <!-- Actions -->
+        <div class="col-12 d-flex gap-2 mt-3">
+            <button pButton type="submit" [label]="submitLabel" [disabled]="form.invalid">
+            </button>
+
+            <a routerLink="../" class="btn btn-secondary">Cancel</a>
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,87 @@
+<div class="card p-3">
+    <h5 class="mb-3">{{ title }}</h5>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="row g-3">
+
+        <!-- Title -->
+        <div class="col-md-6">
+            <label class="form-label">Title *</label>
+            <input pInputText class="w-100" formControlName="title" />
+        </div>
+
+        <!-- Category -->
+        <div class="col-md-6">
+            <label class="form-label">Category *</label>
+            <select class="form-select" formControlName="category">
+                <option value="" disabled>Select category</option>
+                <option *ngFor="let c of categories" [value]="c.value">
+                    {{ c.label }}
+                </option>
+            </select>
+        </div>
+
+        <!-- Horizon -->
+        <div class="col-md-6">
+            <label class="form-label">Horizon *</label>
+            <select class="form-select" formControlName="horizon">
+                <option value="" disabled>Select horizon</option>
+                <option *ngFor="let h of horizons" [value]="h.value">
+                    {{ h.label }}
+                </option>
+            </select>
+        </div>
+
+        <!-- Status -->
+        <div class="col-md-6">
+            <label class="form-label">Status *</label>
+            <select class="form-select" formControlName="status">
+                <option value="" disabled>Select status</option>
+                <option *ngFor="let s of statuses" [value]="s.value">
+                    {{ s.label }}
+                </option>
+            </select>
+        </div>
+
+        <!-- Priority -->
+        <div class="col-md-6">
+            <label class="form-label">Priority *</label>
+            <p-inputNumber class="w-100" formControlName="priority" [min]="1" [max]="10">
+            </p-inputNumber>
+        </div>
+
+        <!-- Progress -->
+        <div class="col-md-6">
+            <label class="form-label">Progress (%) *</label>
+            <p-slider formControlName="progress" [min]="0" [max]="100">
+            </p-slider>
+            <div class="text-center mt-2">{{ form.get('progress')?.value }}%</div>
+        </div>
+
+        <!-- Start Date -->
+        <div class="col-md-6">
+            <label class="form-label">Start Date *</label>
+            <input type="date" class="form-control" formControlName="startDate">
+        </div>
+
+        <!-- Target Date -->
+        <div class="col-md-6">
+            <label class="form-label">Target Date *</label>
+            <input type="date" class="form-control" formControlName="targetDate">
+        </div>
+
+        <!-- Description -->
+        <div class="col-12">
+            <label class="form-label">Description *</label>
+            <textarea class="form-control" formControlName="description" rows="4"></textarea>
+        </div>
+
+        <!-- Actions -->
+        <div class="col-12 d-flex gap-2 mt-3">
+            <button pButton type="submit" [label]="submitLabel" [disabled]="form.invalid">
+            </button>
+
+            <a routerLink="../" class="btn btn-secondary">Cancel</a>
+        </div>
+
+    </form>
+</div>
