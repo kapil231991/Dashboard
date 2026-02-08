@@ -1,0 +1,49 @@
+<div class="card p-4">
+    <h5 class="mb-4">{{ isEditMode ? 'Edit' : 'Add' }} Task</h5>
+
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="row g-3">
+        <div class="col-12">
+            <label for="title" class="form-label">Title *</label>
+            <input pInputText id="title" class="w-100" formControlName="title" placeholder="Enter task title" />
+        </div>
+
+        <div class="col-12">
+            <label for="description" class="form-label">Description *</label>
+            <textarea class="form-control" id="description" formControlName="description" rows="3"
+                placeholder="Enter task description"></textarea>
+        </div>
+
+        <div class="col-md-6">
+            <label for="status" class="form-label">Status *</label>
+            <select class="form-select" id="status" formControlName="status">
+                <option *ngFor="let s of statuses" [value]="s.value">{{ s.label }}</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="priority" class="form-label">Priority *</label>
+            <select class="form-select" id="priority" formControlName="priority">
+                <option *ngFor="let p of priorities" [value]="p.value">{{ p.label }}</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="dueDate" class="form-label">Due Date *</label>
+            <input type="date" class="form-control" id="dueDate" formControlName="dueDate" />
+        </div>
+
+        <div class="col-md-6">
+            <label for="estimatedTime" class="form-label">Estimated Time (minutes) *</label>
+            <p-inputNumber id="estimatedTime" class="w-100" formControlName="estimatedTime" [min]="0"
+                suffix=" min"></p-inputNumber>
+        </div>
+
+        <div class="col-12 d-flex justify-content-end gap-2 mt-4">
+            <button type="button" pButton label="Cancel" class="p-button-secondary" (click)="goBack()"></button>
+            <button type="submit" pButton [label]="isEditMode ? 'Update' : 'Create'" [loading]="loading"
+                [disabled]="taskForm.invalid"></button>
+        </div>
+    </form>
+</div>
+
+<p-toast></p-toast>

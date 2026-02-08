@@ -14,5 +14,10 @@ export const MILESTONES_FEATURE_ROUTES: Routes = [
     {
         path: 'edit/:id',
         component: AddEditMilestoneComponent
+    },
+    {
+        path: ':milestoneId/tasks',
+        loadChildren: () => import('../tasks/tasks.routes')
+            .then(m => m.TASKS_FEATURE_ROUTES)
     }
 ];

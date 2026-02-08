@@ -9,17 +9,24 @@
         </a>
     </div>
 
-    <p-table [value]="notes()" [rows]="10" [paginator]="true" responsiveLayout="scroll">
+    <div class="mb-3 position-relative">
+        <i class="pi pi-search position-absolute" style="left:10px;top:50%;transform:translateY(-50%)"></i>
+        <input type="text" class="form-control ps-5" placeholder="Search notes..." (input)="onSearch($event)" />
+    </div>
+
+
+    <p-table #dt [value]="notes()" [rows]="10" [paginator]="true" responsiveLayout="scroll"
+        [globalFilterFields]="['title','content']">
         <ng-template pTemplate="header">
             <tr>
                 <th>Title</th>
-                <th style="width: 150px">Actions</th>
+                <th class="text-center action-col" style="width: 150px">Actions</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-note>
             <tr>
                 <td>{{ note.title }}</td>
-                <td>
+                <td class="text-center action-col">
                     <button pButton icon="pi pi-eye" class="p-button-text p-button-sm me-1"
                         (click)="viewNote(note)"></button>
                     <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm me-1"

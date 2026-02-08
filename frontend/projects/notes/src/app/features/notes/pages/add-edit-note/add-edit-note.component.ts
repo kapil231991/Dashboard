@@ -64,7 +64,7 @@ export class AddEditNoteComponent implements OnInit {
             });
         } else {
             this.messageService.add({ severity: 'warn', summary: 'Not Found', detail: 'Note not found locally' });
-            this.router.navigate(['../'], { relativeTo: this.route });
+            this.router.navigate(['/notes'], { relativeTo: this.route });
         }
     }
 
@@ -77,7 +77,7 @@ export class AddEditNoteComponent implements OnInit {
             this.notesService.updateNote(this.noteId, payload).subscribe({
                 next: () => {
                     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Note updated' });
-                    this.router.navigate(['../'], { relativeTo: this.route });
+                    this.router.navigate(['/notes'], { relativeTo: this.route });
                 },
                 error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update' })
             });
@@ -85,7 +85,7 @@ export class AddEditNoteComponent implements OnInit {
             this.notesService.addNote(payload).subscribe({
                 next: () => {
                     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Note created' });
-                    this.router.navigate(['../'], { relativeTo: this.route });
+                    this.router.navigate(['/notes'], { relativeTo: this.route });
                 },
                 error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to create' })
             });

@@ -45,6 +45,9 @@
 
                 <!-- Actions -->
                 <td class="text-center action-col">
+                    <button pButton type="button" icon="pi pi-check-square" class="p-button-text p-button-sm me-2"
+                        (click)="onViewTasks(milestone.id)" pTooltip="View Tasks" tooltipPosition="top"></button>
+
                     <button pButton type="button" icon="pi pi-pencil" class="p-button-text p-button-sm me-2"
                         (click)="onEdit(milestone.id)"></button>
 

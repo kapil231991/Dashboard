@@ -61,6 +61,10 @@ export class ListGoalsComponent implements OnInit {
         this.router.navigate(['/strategy/goals', goalId, 'milestones']);
     }
 
+    onViewTasks(goalId: string): void {
+        this.router.navigate(['/strategy/goals', goalId, 'tasks']);
+    }
+
     onDelete(id: string): void {
         this.confirmationService.confirm({
             message: 'Are you sure you want to delete this goal?',

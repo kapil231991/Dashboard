@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+/* Elegant Table Styling */
+.p-datatable .p-datatable-thead>tr>th {
+    padding: 0.6rem 1rem !important;
+    background-color: #f8f9fa !important;
+    color: #495057 !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid #dee2e6 !important;
+}
+
+.p-datatable .p-datatable-tbody>tr>td {
+    padding: 0.5rem 1rem !important;
+    border-bottom: 1px solid #e9ecef !important;
+    vertical-align: middle !important;
+}
+
+.p-datatable .p-datatable-tbody>tr:hover {
+    background-color: #f1f3f5 !important;
+}
+
+/* Action Buttons */
+.p-button.p-button-text.p-button-sm {
+    width: 2rem !important;
+    height: 2rem !important;
+    padding: 0 !important;
+}

@@ -90,6 +90,10 @@ export class ListMilestonesComponent implements OnInit {
         this.router.navigate(['edit', id], { relativeTo: this.route });
     }
 
+    onViewTasks(id: string): void {
+        this.router.navigate([id, 'tasks'], { relativeTo: this.route });
+    }
+
     onDelete(id: string): void {
         this.confirmationService.confirm({
             message: 'Are you sure you want to delete this milestone?',

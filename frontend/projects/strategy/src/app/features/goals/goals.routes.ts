@@ -19,5 +19,10 @@ export const GOALS_FEATURE_ROUTES: Routes = [
         path: ':goalId/milestones',
         loadChildren: () => import('../milestones/milestones.routes')
             .then(m => m.MILESTONES_FEATURE_ROUTES)
+    },
+    {
+        path: ':goalId/tasks',
+        loadChildren: () => import('../tasks/tasks.routes')
+            .then(m => m.TASKS_FEATURE_ROUTES)
     }
 ];

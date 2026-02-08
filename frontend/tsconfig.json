@@ -51,6 +51,9 @@
     },
     {
       "path": "./projects/notes/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/strategy/tsconfig.app.json"
     }
   ]
 }

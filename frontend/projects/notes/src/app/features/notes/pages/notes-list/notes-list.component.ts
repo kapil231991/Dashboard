@@ -11,6 +11,8 @@ import { ToastModule } from 'primeng/toast';
 import { Note } from '../../../../models/note.model';
 import { NotesService } from '../../../../notes.service';
 import { ViewNoteComponent } from '../../components/view-note/view-note.component';
+import { ViewChild } from '@angular/core';
+import { Table } from 'primeng/table';
 
 @Component({
     selector: 'app-notes-list',
@@ -41,6 +43,8 @@ export class NotesListComponent implements OnInit {
     notes = this.notesService.notes;
     ref: DynamicDialogRef | undefined | null;
 
+    @ViewChild('dt') dt!: Table;
+
     constructor() { }
 
     ngOnInit() { }
@@ -67,5 +71,10 @@ export class NotesListComponent implements OnInit {
                 });
             }
         });
+    }
+
+    onSearch(event: Event) {
+        const input = event.target as HTMLInputElement;
+        this.dt.filterGlobal(input.value, 'contains');
     }
 }

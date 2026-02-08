@@ -1,0 +1,78 @@
+<div class="card p-3">
+    <div class="mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+                <h5 class="m-0">{{ title }}</h5>
+                <p class="text-muted mb-0" *ngIf="subtitle">{{ subtitle }}</p>
+            </div>
+            <div>
+                <a routerLink="add" class="btn btn-primary me-2">
+                    <i class="pi pi-plus me-2"></i> Add Task
+                </a>
+                <a [routerLink]="milestoneId ? '../../' : '/strategy/goals'" class="btn btn-secondary">
+                    <i class="pi pi-arrow-left me-2"></i> Back
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <p-table [value]="tasks" [loading]="loading" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20]"
+        responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+                <th>Est. Time</th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-task>
+            <tr>
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>
+                    <span class="px-2 py-1 border-round text-sm" [ngClass]="{
+                        'bg-blue-100 text-blue-700': task.status === 'TODO',
+                        'bg-yellow-100 text-yellow-700': task.status === 'IN_PROGRESS',
+                        'bg-green-100 text-green-700': task.status === 'COMPLETED',
+                        'bg-gray-100 text-gray-700': task.status === 'ON_HOLD',
+                        'bg-red-100 text-red-700': task.status === 'CANCELLED'
+                    }">
+                        {{ task.status }}
+                    </span>
+                </td>
+                <td>
+                    <span class="px-2 py-1 border-round text-sm" [ngClass]="{
+                        'bg-gray-100 text-gray-700': task.priority === 0,
+                        'bg-blue-100 text-blue-700': task.priority === 1,
+                        'bg-orange-100 text-orange-700': task.priority === 2,
+                        'bg-red-100 text-red-700': task.priority === 3
+                    }">
+                        {{ getPriorityLabel(task.priority) }}
+                    </span>
+                </td>
+                <td>{{ task.dueDate | date }}</td>
+                <td>{{ task.estimatedTime }} min</td>
+                <td class="text-center">
+                    <button pButton type="button" icon="pi pi-pencil" class="p-button-text p-button-sm me-2"
+                        (click)="onEdit(task.id)"></button>
+                    <button pButton type="button" icon="pi pi-trash" class="p-button-text p-button-sm p-button-danger"
+                        (click)="onDelete(task.id)"></button>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="7" class="text-center">No tasks found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-confirmDialog></p-confirmDialog>
+<p-toast></p-toast>
